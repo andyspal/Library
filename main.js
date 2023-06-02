@@ -1,84 +1,73 @@
-
-
 let myLibrary = [];
-let books_container = document.querySelector(".books_container");
-let submit_button = document.querySelector(".submit");
 let form = document.querySelector("form")
-function Book(name,author,pages) {
-  this.name = name;
+let booksContainer = document.querySelector('.books_container');
+
+function Book(title, author, pages){
+  this.title = title;
   this.author = author;
   this.pages = pages;
 
-  this.info = function(){
-    return `Title: ${name}\nAuthor: ${author}\nPages: ${pages}`;
+}
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  if (form.checkValidity()) {
+    addToLibrary();
+    displayLibrary();
+    form.reset();
+  }
+  else{
+    let alert = document.createElement('p');
+    alert.textContent = '* Please fill the form';
+    form.appendChild(alert);
+  }
+});
+
+
+
+function addToLibrary(){
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
+  let pages = document.getElementById("pages").value;
+  let book = new Book(title,author,pages);
+  myLibrary.push(book);
+  console.log(myLibrary);
+}
+
+
+function displayLibrary(){
+  booksContainer.innerHTML = '';
+  for(let i = 0; i < myLibrary.length; i++){
+    let book = myLibrary[i];
+    let card = document.createElement('div');
+    let title_h2 = document.createElement('h2');
+    let author_p = document.createElement('p');
+    let pages_p = document.createElement('p');
+    let del_btn = document.createElement('button');
+
+    title_h2.textContent = book.title;
+    author_p.textContent = `Author: ${book.author}`;
+    pages_p.textContent = `Pages: ${book.pages}`;
+    del_btn.textContent = "Delete"
+    del_btn.addEventListener('click', function() {
+      deleteBook(i);
+      displayLibrary(); 
+      console.log(myLibrary)
+    });
+    
+    let elements = [title_h2,author_p,pages_p,del_btn];
+
+    booksContainer.appendChild(card);
+    elements.forEach(element => {card.appendChild(element)});
   }
 }
+
+
 
 function toggleForm(){
     let form_container = document.querySelector(".form_container");
     form_container.classList.toggle("show"); 
 }
-submit_button.addEventListener('click', function(event){
-  event.preventDefault();
-  if (form.checkValidity()) {
-  let title = document.getElementById("title").value;
-  let author = document.getElementById("author").value;
-  let pages = document.getElementById("pages").value;
 
-  let book = new Book(title,author,pages);
-  
-  myLibrary.push(book);
-
-  displayBook(title,author,pages);
-  toggleForm();
-  
-  }
-  else {
-    
-  }
-})
-
-
-function displayBook(title,author,pages){
-  const contenedor = document.createElement("div");
-  const deleteButton = document.createElement("button");
-  const title_h2 = document.createElement("h2");
-  const author_p = document.createElement("p");
-  const pages_p = document.createElement("p");
-
-  books_container.appendChild(contenedor);
-
-  contenedor.appendChild(title_h2).textContent = title;
-  contenedor.appendChild(author_p).textContent =  `Author: ${author}`;
-  contenedor.appendChild(pages_p).textContent = `Pages: ${pages}`;
-  contenedor.appendChild(deleteButton);
-  deleteButton.textContent = "Eliminar";
-  deleteButton.onclick = function() {
-    books_container.removeChild(contenedor);
-  };
-
-  
+function deleteBook(index){
+  myLibrary.splice(index,1);
 }
-for(let i = 0; i <= myLibrary.length; i++){
-  let libro = myLibrary[i];
-  const contenedor = document.createElement("div");
-  const title = document.createElement("h2");
-  const author = document.createElement("p");
-  const pages = document.createElement("p");
-  title.textContent = libro.name;
-  author.textContent = libro.author;
-  pages.textContent = libro.pages;
-  books_container.appendChild(contenedor);
-  contenedor.appendChild(title)
-  contenedor.appendChild(author);
-  contenedor.appendChild(pages)
-  var deleteButton = document.createElement("button");
-  deleteButton.textContent = "Eliminar";
-  contenedor.appendChild(deleteButton);
-
-  deleteButton.onclick = function() {
-    books_container.removeChild(contenedor);
-  };
-}
-
-

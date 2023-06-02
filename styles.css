@@ -12,6 +12,7 @@ header {
     justify-content: space-around;
     align-items: center;
     padding: 2rem;
+
 }
 
 .header_title {
@@ -70,11 +71,6 @@ main {
     align-items: center;
 }
 
-.book_container {
-    background-color: red;
-    display: grid;
-    grid-template-columns: repeat(minmax(1fr, 200px));
-}
 
 .form_container {
     display: none;
@@ -113,7 +109,7 @@ input[type="number"] {
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #4c90af;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -122,14 +118,14 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #4571a0;
 }
 
 .books_container{
     margin-top: 4rem;
-    width: clamp(300px,50vw, 1200px);
     display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    grid-template-columns: repeat(3,minmax(300px,1fr));
+    grid-auto-rows: column;
     gap: 4rem;
 
 }
@@ -137,9 +133,9 @@ input[type="submit"]:hover {
     display: grid;
     place-items: center;
     border: 1px solid black;
-    background-color: #45a049;
+    background-color: #e5e5e5;
     border-radius: .7rem;
-    padding: 40px 0px;
+    padding: 40px 20px;
 }
 
 .books_container div h2{
@@ -152,5 +148,5 @@ input[type="submit"]:hover {
     font-size: 1.3rem;
     font-weight: 300;
     padding-bottom: 20px;
-    text-align: ce;
+    justify-self: start;
 }
