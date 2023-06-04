@@ -53,6 +53,7 @@ function displayLibrary(){
     read_label.htmlFor = 'is_Read';
     read_label.textContent = 'Read';
     let checkbox_div = document.createElement('div')
+    checkbox_div.classList.add('checkbox_div')
 
     title_h2.textContent = book.title;
     author_p.textContent = `Author: ${book.author}`;
@@ -75,7 +76,7 @@ function displayLibrary(){
     elements.forEach(element => {card.appendChild(element)});
     checkbox_div.appendChild(read_label);
     checkbox_div.appendChild(read_cbox);
-    
+
     
   }
 }
