@@ -2,10 +2,12 @@ let myLibrary = [];
 let form = document.querySelector("form")
 let booksContainer = document.querySelector('.books_container');
 
-function Book(title, author, pages){
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
+class Book{
+  constructor(title,author,pages){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+  }
 }
 form.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -20,7 +22,6 @@ form.addEventListener('submit', function(event) {
     form.appendChild(alert);
   }
 });
-
 
 
 function addToLibrary(){
